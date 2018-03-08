@@ -1,36 +1,60 @@
 $(document).ready(function () {
+    var animals = ["Cat", "Dog", "Parakeet", "Snake", "Chimp", "Horse"]
 
-    var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q=' + input + '&limit=25&offset=0&rating=G&lang=en'
+    function createButtons() {
+        $("#buttons").empty();
 
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    }).then()
-
-
-    function createButtons {
-
-        // Deletes the movies prior to adding new movies
-        // (this is necessary otherwise you will have repeat buttons)
-        $("#buttons-view").empty();
-
-        // Loops through the array of movies
-        for (var i = 0; i < movies.length; i++) {
-
-            // Then dynamicaly generates buttons for each movie in the array
-            // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+        for (var i = 0; i < animals.length; i++) {
             var a = $("<button>");
-            // Adds a class of movie to our button
-            a.addClass("movie");
-            // Added a data-attribute
-            a.attr("data-name", movies[i]);
+            a.addClass("animal");
+            a.attr("data-animal", animals[i]);
             // Provided the initial button text
-            a.text(movies[i]);
+            a.text(animals[i]);
             // Added the button to the buttons-view div
-            $("#buttons-view").append(a);
-        }
+            $("#buttons").append(a);
+        };
+    };
 
-    }
+
+    createButtons();
+
+    $("#add-animal").on("click", function (event) {
+        event.preventDefault();
+        var newAnimal = $("#user-input").val().trim();
+        animals.push(newAnimal);
+        createButtons();
+    });
+
+        $(document).on('click','.animal', function () {
+            var animal = $(this).attr("data-animal");
+            var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q=' + animal + '&limit=10&offset=0&lang=en'
+            $.ajax({
+                url: queryURL,
+                method: 'GET'
+            }).then(function (response) {
+                console.log(response);
+                for (var i = 0; i < response.data.length; i++) {
+                    var animalDiv = $('<div>');
+
+                    rating = response.data[i].rating;
+
+                    var p = $('<p>').text("Rating: " + rating);
+
+                    var animalImage = $('<img>');
+                    animalImage.attr('src', response.data[i].images.fixed_height.url);
+                    $(animalDiv).append(p);
+                    $(animalDiv).append(animalImage);
+                    $('#gif-display').prepend(animalDiv);
+                };
+            })
+
+        })
+
+
+    // $(document).on("click", ".movie", addGifs);
+
+
+
 
 })
 
