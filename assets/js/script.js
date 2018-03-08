@@ -25,36 +25,54 @@ $(document).ready(function () {
         createButtons();
     });
 
-        $(document).on('click','.animal', function () {
-            var animal = $(this).attr("data-animal");
-            var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q=' + animal + '&limit=10&offset=0&lang=en'
-            $.ajax({
-                url: queryURL,
-                method: 'GET'
-            }).then(function (response) {
-                console.log(response);
-                for (var i = 0; i < response.data.length; i++) {
-                    var animalDiv = $('<div>');
+    $(document).on('click', '.animal', function () {
+        var animal = $(this).attr("data-animal");
+        var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q=' + animal + '&limit=10&offset=0&lang=en'
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function (response) {
+            console.log(response);
+            for (var i = 0; i < response.data.length; i++) {
+                var animalDiv = $('<div>');
+                animalDiv.attr('id', i);
+                
+                rating = response.data[i].rating;
+                
+                var p = $('<p>').text("Rating: " + rating);
+                
+                var animalImage = $('<img>');
+                animalImage.addClass('gif');
+                animalImage.attr('data-state', 'still');
+                var still = response.data[i].images.fixed_width_still.url;                var animate = response.data[i].images.fixed_width.url;
 
-                    rating = response.data[i].rating;
+            
 
-                    var p = $('<p>').text("Rating: " + rating);
+                animalImage.attr('src', still);
+                $(animalDiv).append(p);
+                $(animalDiv).append(animalImage);
+                $('#gif-display').prepend(animalDiv);
+            
+            
+            $(document).on('click', '.gif', function () {
+                var state = $(this).attr('data-state');
 
-                    var animalImage = $('<img>');
-                    animalImage.attr('src', response.data[i].images.fixed_height.url);
-                    $(animalDiv).append(p);
-                    $(animalDiv).append(animalImage);
-                    $('#gif-display').prepend(animalDiv);
+                if (state === 'still') {
+                    console.log(animate);
+                    $(this).attr('src', animate);
+                    $(this).attr('data-state', 'animate');
+
+                } else if (state === 'animate') {
+
+                    $(this).attr('src', still);
+                    $(this).attr('data-state', 'still');
+
                 };
+
             })
+        };
 
-        })
-
-
-    // $(document).on("click", ".movie", addGifs);
-
-
-
-
-})
+        });
+    });
+});
 
