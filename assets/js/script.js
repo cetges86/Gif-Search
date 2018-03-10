@@ -62,34 +62,25 @@ $(document).ready(function () {
 
                 $(document).on('click', '.gif', function () {
                     var state = $(this).attr('data-state');
-                    var still = $(this).attr('data-still');
-                    var animate = $(this).attr('data-animate');
+                    console.log(state);
 
-                    if (state === 'still') {
-                        $(this).attr('src', animate);
-                        $(this).attr('data-state', 'animate');
+                    $('img').on('click', function () {
 
-                    } else if (state === 'animate') {
-                        $(this).attr('src', still);
-                        $(this).attr('data-state', 'still');
+                        var still = $(this).attr('data-still');
+                        var animate = $(this).attr('data-animate');
 
-                    };
+                        if (state === 'animate') {
+                            $(this).attr('src', still);
+                            $(this).attr('data-state', 'still');
 
-                    //$('img').on('click', function () {
-                    // if (state === 'still') {
-                    //   var animate = $(this).attr('data-animate');
-                    //   $(this).attr('src', animate);
-                    //   $(this).attr('data-state', 'animate');
+                        } else if (state === 'still') {
+                            $(this).attr('src', animate);
+                            $(this).attr('data-state', 'animate');
+                        }
 
-                    // } else if (state === 'animate') {
-
-                    //   var still = $(this).attr('data-still');
-                    //   $(this).attr('src', still);
-                    //   $(this).attr('data-state', 'still');
-
-                    // };
-
+                    })
                 })
+
             };
 
         });
