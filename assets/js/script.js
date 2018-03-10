@@ -36,41 +36,61 @@ $(document).ready(function () {
             for (var i = 0; i < response.data.length; i++) {
                 var animalDiv = $('<div>');
                 animalDiv.attr('id', i);
-                
+
                 rating = response.data[i].rating;
-                
+
                 var p = $('<p>').text("Rating: " + rating);
-                
+
                 var animalImage = $('<img>');
                 animalImage.addClass('gif');
                 animalImage.attr('data-state', 'still');
-                var still = response.data[i].images.fixed_width_still.url;                var animate = response.data[i].images.fixed_width.url;
 
-            
+
+
+                var still = response.data[i].images.fixed_width_still.url;
+                var animate = response.data[i].images.fixed_width.url;
+                console.log(animate);
+
 
                 animalImage.attr('src', still);
+                animalImage.attr('data-still', still)
+                animalImage.attr('data-animate', animate);
                 $(animalDiv).append(p);
                 $(animalDiv).append(animalImage);
                 $('#gif-display').prepend(animalDiv);
-            
-            
-            $(document).on('click', '.gif', function () {
-                var state = $(this).attr('data-state');
 
-                if (state === 'still') {
-                    console.log(animate);
-                    $(this).attr('src', animate);
-                    $(this).attr('data-state', 'animate');
 
-                } else if (state === 'animate') {
+                $(document).on('click', '.gif', function () {
+                    var state = $(this).attr('data-state');
+                    var still = $(this).attr('data-still');
+                    var animate = $(this).attr('data-animate');
 
-                    $(this).attr('src', still);
-                    $(this).attr('data-state', 'still');
+                    if (state === 'still') {
+                        $(this).attr('src', animate);
+                        $(this).attr('data-state', 'animate');
 
-                };
+                    } else if (state === 'animate') {
+                        $(this).attr('src', still);
+                        $(this).attr('data-state', 'still');
 
-            })
-        };
+                    };
+
+                    //$('img').on('click', function () {
+                    // if (state === 'still') {
+                    //   var animate = $(this).attr('data-animate');
+                    //   $(this).attr('src', animate);
+                    //   $(this).attr('data-state', 'animate');
+
+                    // } else if (state === 'animate') {
+
+                    //   var still = $(this).attr('data-still');
+                    //   $(this).attr('src', still);
+                    //   $(this).attr('data-state', 'still');
+
+                    // };
+
+                })
+            };
 
         });
     });
