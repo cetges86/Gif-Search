@@ -15,7 +15,6 @@ $(document).ready(function () {
         };
     };
 
-
     createButtons();
 
     $("#add-animal").on("click", function (event) {
@@ -23,6 +22,7 @@ $(document).ready(function () {
         var newAnimal = $("#user-input").val().trim();
         animals.push(newAnimal);
         createButtons();
+        $('#user-input').val('');
     });
 
     $(document).on('click', '.animal', function () {
@@ -32,10 +32,10 @@ $(document).ready(function () {
             url: queryURL,
             method: 'GET'
         }).then(function (response) {
-            console.log(response);
+            console.log(response)
             for (var i = 0; i < response.data.length; i++) {
                 var animalDiv = $('<div>');
-                animalDiv.attr('id', i);
+                animalDiv.addClass('imgDiv')
 
                 rating = response.data[i].rating;
 
@@ -51,18 +51,16 @@ $(document).ready(function () {
                 var animate = response.data[i].images.fixed_width.url;
                 console.log(animate);
 
-
                 animalImage.attr('src', still);
                 animalImage.attr('data-still', still)
                 animalImage.attr('data-animate', animate);
                 $(animalDiv).append(p);
                 $(animalDiv).append(animalImage);
-                $('#gif-display').prepend(animalDiv);
 
+                $(animalDiv).hide().prependTo("#gif-display").fadeIn("2000");
 
                 $(document).on('click', '.gif', function () {
                     var state = $(this).attr('data-state');
-                    console.log(state);
 
                     $('img').on('click', function () {
 
