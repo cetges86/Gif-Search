@@ -42,52 +42,40 @@ $(document).ready(function () {
 
                 var gifDownload = response.data[i].images.original_mp4.mp4;
 
-
-                // var download = $('<span>');
-                // download.addClass('glyphicon glyphicon-save');
-
                 var p = $('<p>').html(`Rating:  ${rating} 
                 <a href ='${gifDownload}' download>
                 <i title= 'Download Gif' class="fas fa-download"></i>
                 </a>`);
+                p.addClass('modal-title');
 
                 var animalImage = $('<img>');
                 animalImage.addClass('gif');
                 animalImage.attr('data-state', 'still');
-
-
+                animalImage.attr('data-toggle', 'modal');
+                animalImage.attr('data-target', '#animalModal');
 
                 var still = response.data[i].images.fixed_width_still.url;
-                var animate = response.data[i].images.fixed_width.url;
+                var modal = response.data[i].images.original.url;
+
                 console.log(clickCount);
+                
+                var modalGif = $('<img>');
+                modalGif.attr('src', modal);
 
                 animalImage.attr('src', still);
-                animalImage.attr('data-still', still)
-                animalImage.attr('data-animate', animate);
+                animalImage.attr('data-animate', modal);
                 $(animalDiv).append(p);
-                // $(animalDiv).append(download);
+
                 $(animalDiv).append(animalImage);
 
                 $(animalDiv).hide().prependTo("#gif-display").fadeIn(2000);
 
                 $(document).on('click', '.gif', function () {
-                    var state = $(this).attr('data-state');
+                    var modal = $(this).attr('data-animate')                    
 
-                    $('img').on('click', function () {
+                    modalGif.attr('src', modal);
+                    $('#modalText').html(modalGif);
 
-                        var still = $(this).attr('data-still');
-                        var animate = $(this).attr('data-animate');
-
-                        if (state === 'animate') {
-                            $(this).attr('src', still);
-                            $(this).attr('data-state', 'still');
-
-                        } else if (state === 'still') {
-                            $(this).attr('src', animate);
-                            $(this).attr('data-state', 'animate');
-                        }
-
-                    })
                 })
 
             };
