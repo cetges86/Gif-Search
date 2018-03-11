@@ -1,29 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Animal Gif Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Questrial" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Animal GIF Search</h1>
-    
-        <div id="buttons"></div>
-    
-        <form id="animal-search">
-          <label for="user-input">Add An Animal</label>
-          <input type="text" id="user-input">
-          <br>
-    
-          <input id="add-animal" type="submit" value="Submit">
-        </form>
-    
-        <div id="gif-display"></div>
-    
+    <div class="container-fluid">
+        <div class="text-center">
+            <br>
+            <h1>Animal GIF Search</h1>
+
+            <div id="buttons"></div>
+            <br>
+            <form id="animal-search">
+                <label for="user-input">Add An Animal: </label>
+                <input type="text" id="user-input">
+
+                <input id="add-animal" type="submit" value="Add Animal">
+            </form>
+        </div>
+        <br>
+        <div class="row">
+            <div class="text-center col-lg-12" id="gif-display"></div>
+        </div>
+    </div>
+
+    <!-- <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </body>
+
 </html>

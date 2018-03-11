@@ -1,12 +1,86 @@
+body {
+    font-family: 'Questrial', sans-serif;
+}
+
+.container-fluid {
+    background-image: url('hypnotize.png');
+    background-repeat: repeat;
+}
+
 .imgDiv {
     display: inline-block;
     max-width: 30%;
     margin:10px;
-    background-color: black;
+    background-color:#0f869e;
     padding:10px;
     border-radius: 15px;
 }
+img {
+    padding: 15px;
+}
 
-p, h3 {
+h1{
+font-size: 5em;
+font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+}
+
+p {
+    color: white;
+    margin-right: 6%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.fa-download {
+    font-size:30px;
+    color: slategray;
+    text-align: right;
+    margin-left: 37%;
+    background-color: white;
+    padding: 7px;
+    top: 5px;
+    border-radius: 50%;
+}
+
+.animal {
+    margin: 5px;
+    padding:5px 10px;
+    background-color:#0f869e;
+    border-radius: 10px;
     color: white;
 }
+
+#add-animal {
+    background-color: lightblue;
+    color: black;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+
+.imgDiv {
+    max-width: 50%;
+}
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .imgDiv {
+        max-width: 35%;
+        margin:15px;
+        padding: 15px;
+    }
+    }
+
+@media screen and (max-width: 480px) {
+    .imgDiv {
+    display: block;
+    margin:0 auto;
+    max-width: 70%;
+    margin-bottom:10px;
+    }
+
+}
+
+

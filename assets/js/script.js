@@ -8,9 +8,7 @@ $(document).ready(function () {
             var a = $("<button>");
             a.addClass("animal");
             a.attr("data-animal", animals[i]);
-            // Provided the initial button text
             a.text(animals[i]);
-            // Added the button to the buttons-view div
             $("#buttons").append(a);
         };
     };
@@ -25,9 +23,12 @@ $(document).ready(function () {
         $('#user-input').val('');
     });
 
+    var clickCount = 0;
+
     $(document).on('click', '.animal', function () {
         var animal = $(this).attr("data-animal");
-        var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q=' + animal + '&limit=10&offset=0&lang=en'
+        var queryURL = `https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q='${animal}&limit=10&offset=${clickCount}&rating=PG-13&lang=en`
+        clickCount = clickCount + 10;
         $.ajax({
             url: queryURL,
             method: 'GET'
@@ -35,15 +36,20 @@ $(document).ready(function () {
             console.log(response)
             for (var i = 0; i < response.data.length; i++) {
                 var animalDiv = $('<div>');
-                animalDiv.addClass('imgDiv')
+                animalDiv.addClass('imgDiv text-center');
 
                 var rating = response.data[i].rating;
-                var gifTitle = response.data[i].title;
-                
 
-                var title = $('<h3>').text(gifTitle);
+                var gifDownload = response.data[i].images.original_mp4.mp4;
 
-                var p = $('<p>').text("Rating: " + rating);
+
+                // var download = $('<span>');
+                // download.addClass('glyphicon glyphicon-save');
+
+                var p = $('<p>').html(`Rating:  ${rating} 
+                <a href ='${gifDownload}' download>
+                <i title= 'Download Gif' class="fas fa-download"></i>
+                </a>`);
 
                 var animalImage = $('<img>');
                 animalImage.addClass('gif');
@@ -53,16 +59,16 @@ $(document).ready(function () {
 
                 var still = response.data[i].images.fixed_width_still.url;
                 var animate = response.data[i].images.fixed_width.url;
-                console.log(animate);
+                console.log(clickCount);
 
                 animalImage.attr('src', still);
                 animalImage.attr('data-still', still)
                 animalImage.attr('data-animate', animate);
-                $(animalDiv).append(title);
                 $(animalDiv).append(p);
+                // $(animalDiv).append(download);
                 $(animalDiv).append(animalImage);
 
-                $(animalDiv).hide().prependTo("#gif-display").fadeIn("2000");
+                $(animalDiv).hide().prependTo("#gif-display").fadeIn(2000);
 
                 $(document).on('click', '.gif', function () {
                     var state = $(this).attr('data-state');
