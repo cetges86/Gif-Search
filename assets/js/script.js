@@ -37,7 +37,11 @@ $(document).ready(function () {
                 var animalDiv = $('<div>');
                 animalDiv.addClass('imgDiv')
 
-                rating = response.data[i].rating;
+                var rating = response.data[i].rating;
+                var gifTitle = response.data[i].title;
+                
+
+                var title = $('<h3>').text(gifTitle);
 
                 var p = $('<p>').text("Rating: " + rating);
 
@@ -54,6 +58,7 @@ $(document).ready(function () {
                 animalImage.attr('src', still);
                 animalImage.attr('data-still', still)
                 animalImage.attr('data-animate', animate);
+                $(animalDiv).append(title);
                 $(animalDiv).append(p);
                 $(animalDiv).append(animalImage);
 
