@@ -29,7 +29,7 @@ $(document).ready(function () {
     $(document).on('click', '.animal', function () {
         //sets up API call
         var animal = $(this).attr("data-animal");
-        var queryURL = `https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q='${animal}&limit=10&offset=${clickCount}&rating=PG-13&lang=en`
+        var queryURL = `https://api.giphy.com/v1/gifs/search?api_key=VI3fGPPXO4IGaZP0AmgPz6TTfTo8Eq7W&q='${animal}&limit=10&offset=${clickCount}&rating=R&lang=en`
         //sets up "offset" value to grab different gifs each time
         clickCount = clickCount + 10;
         $.ajax({
